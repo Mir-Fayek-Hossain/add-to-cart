@@ -1,13 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit"
-import { IProduct } from "./../@types/cart"
+import { IState } from "../@types/cart"
 
-const initialState = {
+const initialState: IState = {
   products: [],
   subTotal: 0,
-}
-export interface IState {
-  products: IProduct[]
-  subTotal: number
 }
 const cartSlice = createSlice({
   name: "cart",
@@ -32,19 +28,6 @@ const cartSlice = createSlice({
         }
       }
     },
-    // decrementQuantity(state: IState, action) {
-    //   for (const [index, value] of state.products.entries()) {
-    //     if (value.name === action.payload) {
-    //       state.subTotal = state.subTotal - value.price
-    //       if (value.quantity > 1) {
-    //         value.quantity -= 1
-    //         return
-    //       }
-    //       state.products.splice(index, 1)
-    //       return
-    //     }
-    //   }
-    // },
     decrementQuantity(state: IState, action) {
       for (let index = 0; index < state.products.length; index++) {
         if (state.products[index].name === action.payload) {

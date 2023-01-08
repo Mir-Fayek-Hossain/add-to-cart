@@ -5,3 +5,7 @@ export interface IProduct {
   price: number
   quantity: number
 }
+export interface IState {
+  products: IProduct[]
+  subTotal: number
+}
