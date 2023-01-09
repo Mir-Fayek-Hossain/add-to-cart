@@ -18,12 +18,12 @@ function Cart(): ReactElement {
   const dispatch = useAppDispatch()
   return (
     <div>
-      {cart.length && (
+      {cart.length ? (
         <TableContainer component={Paper}>
           <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
             <TableHead>
               <TableRow>
-                <TableCell>Product ID</TableCell>
+                <TableCell align="center">Product ID</TableCell>
                 <TableCell align="center">Name</TableCell>
                 <TableCell align="center">Price</TableCell>
                 <TableCell align="center">Quantity</TableCell>
@@ -35,31 +35,37 @@ function Cart(): ReactElement {
                   key={row.name}
                   sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                 >
-                  <TableCell component="th" scope="row">
+                  <TableCell align="center" component="th" scope="row">
                     {row?.id}
                   </TableCell>
                   <TableCell align="center">{row?.name}</TableCell>
                   <TableCell align="center">{row?.price}</TableCell>
                   <TableCell align="center">
-                    <AddCircleIcon
-                      onClick={() => dispatch(incrementQuantity(row?.name))}
-                    />
-                    {row?.quantity}
-                    <RemoveCircleIcon
-                      onClick={() => dispatch(decrementQuantity(row?.name))}
-                    />
+                    <div className="quantity__container">
+                      <AddCircleIcon
+                        onClick={() => dispatch(incrementQuantity(row?.name))}
+                      />
+                      <h2>{row?.quantity}</h2>
+                      <RemoveCircleIcon
+                        onClick={() => dispatch(decrementQuantity(row?.name))}
+                      />
+                    </div>
                   </TableCell>
                 </TableRow>
               ))}
             </TableBody>
             <TableFooter>
               <TableRow>
-                <TableCell colSpan={2} />
-                <TableCell colSpan={2}>Total: {sub} BDT</TableCell>
+                <TableCell colSpan={3} />
+                <TableCell align="center">
+                  <h2>Total: {sub} BDT</h2>
+                </TableCell>
               </TableRow>
             </TableFooter>
           </Table>
         </TableContainer>
+      ) : (
+        ""
       )}
     </div>
   )
